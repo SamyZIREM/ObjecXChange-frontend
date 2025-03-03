@@ -1,0 +1,74 @@
+<div class="objet-container">
+  <!-- Message de succès ou d'erreur -->
+  <div *ngIf="message" class="message">
+    <p>{{ message }}</p>
+  </div>
+
+  <!-- Boutons d'actions -->
+  <button (click)="goToEchanges()" style="margin-left: 85%; ">Voir mes échanges</button>
+
+  <!-- Barre de recherche -->
+  <h3>Rechercher un objet par mot clé pour voir s'il est disponible</h3>
+  <input [(ngModel)]="searchKeyword" (input)="searchObjects()" placeholder="Rechercher un objet...">
+
+  <!-- Afficher la section de résultats uniquement après avoir commencé à chercher -->
+  <div *ngIf="searchKeyword.length > 0">
+    <h2>Résultat des objets recherchés (disponibles)</h2>
+    <!-- Liste des objets filtrés -->
+    <div class="object-list" *ngIf="filteredObjects.length > 0">
+      <div *ngFor="let object of filteredObjects" class="object-card">
+        <p><strong>{{ object.nom }}</strong></p>
+        <p>{{ object.description }}</p>
+      </div>
+    </div>
+
+    <!-- Message si aucun objet trouvé -->
+    <div *ngIf="filteredObjects.length === 0">
+      <p>Aucun objet trouvé pour cette recherche.</p>
+    </div>
+  </div>
+
+  <h2>Mes objets</h2>
+  <!-- Liste des objets de l'utilisateur -->
+  <div class="object-list">
+    <div *ngFor="let object of userObjects" class="object-card">
+      <p><strong>{{ object.nom }}</strong></p>
+      <p>{{ object.description }}</p>
+      <button (click)="openExchangePopup(object)">Échanger</button>
+    </div>
+  </div>
+
+  <!-- Formulaire pour ajouter un objet -->
+  <div class="add-object-form">
+    <h3>Ajouter un nouvel objet</h3>
+    <input [(ngModel)]="newObjectName" placeholder="Nom de l'objet" />
+    <input [(ngModel)]="newObjectDescription" placeholder="Description de l'objet" />
+    <button (click)="addObject()" [disabled]="!newObjectName || !newObjectDescription" style="margin-left: 2%;">Ajouter l'objet</button>
+  </div>
+</div>
+
+<!-- Pop-up de sélection de l’objet à échanger -->
+<div class="popup-overlay" *ngIf="isExchangePopupOpen">
+  <div class="popup">
+    <h3>Choisir un objet pour l'échange</h3>
+    <input [(ngModel)]="searchKeyword" (input)="searchObjects()" placeholder="Rechercher un objet..." />
+    
+    <!-- Afficher les résultats de la recherche seulement après que l'utilisateur ait commencé à taper -->
+    <div *ngIf="searchKeyword.length > 0">
+      <div class="object-list">
+        <div *ngFor="let object of filteredObjects" class="object-card">
+          <p><strong>{{ object.nom }}</strong></p>
+          <p>{{ object.description }}</p>
+          <button (click)="proposerEchange(selectedUserObject, object)">Échanger avec cet objet</button>
+        </div>
+      </div>
+
+      <!-- Message si aucun objet trouvé -->
+      <div *ngIf="filteredObjects.length === 0">
+        <p>Aucun objet trouvé pour cette recherche.</p>
+      </div>
+    </div>
+
+    <button class="close-btn" (click)="closeExchangePopup()">Annuler</button>
+  </div>
+</div>

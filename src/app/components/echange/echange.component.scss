@@ -1,0 +1,72 @@
+/* Style global pour le conteneur des échanges */
+.echange-container {
+    padding: 20px;
+    background-color: #f9f9f9; /* Couleur de fond douce */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .echange-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacement entre chaque carte */
+  }
+  
+  .echange-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère pour les cartes */
+    border-left: 5px solid #3498db; /* Bordure bleue à gauche */
+    transition: transform 0.3s ease-in-out; /* Animation de survol */
+  }
+  
+  .echange-card:hover {
+    transform: scale(1.02); /* Effet de zoom au survol */
+  }
+  
+  .echange-card p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .echange-card strong {
+    color: #3498db; /* Couleur bleue pour les labels */
+  }
+  
+  .echange-card .statut {
+    font-weight: bold;
+  }
+  
+  .echange-card .date {
+    font-style: italic;
+    color: #888;
+  }
+  
+  .echange-card .statut.en-attente {
+    color: orange; /* Orange pour les échanges en attente */
+  }
+  
+  .echange-card .statut.accepte {
+    color: green; /* Vert pour les échanges acceptés */
+  }
+  
+  .echange-card .statut.refuse {
+    color: red; /* Rouge pour les échanges refusés */
+  }
+  
+  .echange-card .date {
+    margin-top: 10px;
+    color: #888;
+  }
+  

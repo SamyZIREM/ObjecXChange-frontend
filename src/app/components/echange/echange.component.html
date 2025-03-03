@@ -1,0 +1,20 @@
+<div class="echange-container">
+  <h2>Mes échanges</h2>
+
+  <div class="echange-list">
+    <div *ngFor="let echange of echanges" class="echange-card">
+      <p><strong>Objet offert :</strong> {{ echange.objetOffert.nom }} ({{ echange.objetOffert.description }})</p>
+      <p><strong>Objet demandé :</strong> {{ echange.objetDemande.nom }} ({{ echange.objetDemande.description }})</p>
+      <p><strong>Demandeur :</strong> {{ echange.demandeur.nom }}</p>
+      <p><strong>Receveur :</strong> {{ echange.receveur.nom }}</p>
+      <p><strong>Statut :</strong> {{ echange.statut }}</p>
+      <p><strong>Date de proposition :</strong> {{ echange.dateDemande | date }}</p>
+
+      <!-- Afficher les boutons "Accepter" et "Refuser" uniquement si l'échange est en attente -->
+      <div *ngIf="echange.statut === 'EN_ATTENTE' && estReceveur(echange)">
+        <button (click)="accepterEchange(echange.id)">Accepter</button>
+        <button (click)="refuserEchange(echange.id)">Refuser</button>
+      </div>
+    </div>
+  </div>
+</div>

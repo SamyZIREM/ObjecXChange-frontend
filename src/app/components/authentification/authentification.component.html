@@ -1,0 +1,26 @@
+<div class="auth-container">
+    <h2 *ngIf="!isInscription">Connexion</h2>
+    <h2 *ngIf="isInscription">Inscription</h2>
+  
+    <!-- Formulaire de Connexion -->
+    <div *ngIf="!isInscription">
+      <input [(ngModel)]="email" placeholder="Email" (ngModelChange)="validateForm()">
+      <input [(ngModel)]="password" placeholder="Mot de passe" type="password" (ngModelChange)="validateForm()">
+      <button (click)="connecter()" [disabled]="!email || !password">Se connecter</button>
+  
+      <p>{{ message }}</p>
+      <p><a href="javascript:void(0);" (click)="isInscription = true">Pas de compte ? Inscrivez-vous ici</a></p>
+    </div>
+  
+    <!-- Formulaire d'Inscription -->
+    <div *ngIf="isInscription">
+      <input [(ngModel)]="nom" placeholder="Nom" (ngModelChange)="validateForm()">
+      <input [(ngModel)]="email" placeholder="Email" (ngModelChange)="validateForm()">
+      <input [(ngModel)]="password" placeholder="Mot de passe" type="password" (ngModelChange)="validateForm()">
+      <button (click)="inscrire()" [disabled]="!isFormValid" [class.disabled]="!isFormValid">S'inscrire</button>
+  
+      <p>{{ message }}</p>
+      <p><a href="javascript:void(0);" (click)="revenirConnexion()">Déjà un compte ? Connectez-vous ici</a></p>
+    </div>
+  </div>
+  
